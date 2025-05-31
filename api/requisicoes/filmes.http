@@ -1,0 +1,48 @@
+@urlBase = http://localhost:5000 
+
+### Pegar todos os filmes
+GET {{urlBase}}/filmes
+
+### Pegar todos os filmes com param de query
+GET {{urlBase}}/filmes?ignorar=elenco,genero
+
+
+### Ping
+GET {{urlBase}}/ping
+
+### Filme Id inexistente
+GET {{urlBase}}/filmes/0
+
+### Filme com Id existente
+GET {{urlBase}}/filmes/FIL001
+
+### Filme com Id existente e param de query
+GET {{urlBase}}/filmes/FIL001?ignorar=elenco,diretor,genero
+
+### Criar um filme
+POST {{urlBase}}/filmes
+Content-Type: application/json
+
+{
+  "titulo": "Novo Filme",
+  "ano": 2020,
+  "genero": [
+    { "id": "GEN001", "nome": "Ação" }
+  ],
+  "diretor": {
+    "id": "DIR102",
+    "nome": "Novo Diretor",
+    "nascimento": "1955-11-09",
+    "nacionalidade": "Brasileiro"
+  },
+  "elenco": [
+    {
+      "id": "ATR104",
+      "nome": "Novo Ator",
+      "papel": "Protagonista",
+      "nascimento": "1983-05-21",
+      "nacionalidade": "Brasileiro"
+    }
+  ],
+  "sinopse": "Um novo filme muito legal."
+}

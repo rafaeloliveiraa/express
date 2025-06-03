@@ -1,7 +1,7 @@
 import express from 'express'
 import { configDotenv } from 'dotenv'
 import { filmes } from './dados/filmes.ts'
-import type { Filme } from './model/index.ts'
+import type { Ator, Filme, Genero } from './model/index.ts'
 
 configDotenv()
 
@@ -22,6 +22,7 @@ function limparCampos(filme: Filme, ignorar:string | undefined){
 app.get('/ping', (req, res)=>{
     res.send('pong')
 })
+
 // buscar todos os filmes
 app.get('/filmes', (req, res)=>{
     const { ignorar } = req.query as any
@@ -30,6 +31,7 @@ app.get('/filmes', (req, res)=>{
     })
     res.status(200).json(filmesProcessados)
 })
+
 // buscar filme por id
 app.get('/filmes/:id', (req, res)=> {
     const {id} = req.params
@@ -40,7 +42,6 @@ app.get('/filmes/:id', (req, res)=> {
         res.status(404).send('Filme não encontrado')
         return
     } 
-
 
     res.json(limparCampos(filme, ignorar))       
 })
@@ -57,6 +58,32 @@ app.post("/filmes", (req, res)=>{
     novoFilme.id = id
     filmes.push(novoFilme)
     res.status(201).json(novoFilme)
+})
+
+app.patch("/filmes/:id", (req, res)=>{
+    const {id}=req.params
+    const dadosAtualizados = req.body
+    const indice = filmes.findIndex((f: Filme)=>f.id === id)
+    if(indice === -1){
+        res.status(404).send("Filme não encontrado")
+        return
+    }
+    delete dadosAtualizados.id
+    const filmeFinal = {...filmes[indice], ...dadosAtualizados}
+    filmes[indice] = filmeFinal
+    res.send(filmeFinal)
+
+})
+
+app.delete("/filmes/:id", (req, res)=>{
+    const {id} = req.params
+    const indice = filmes.findIndex((f: Filme)=>f.id === id)
+    if(indice === -1){
+        res.status(404).send("Filme não encontrado")
+        return
+    }
+    const filmeRemovido = filmes.splice(indice, 1)
+    res.json(filmeRemovido)
 })
 
 app.listen(porta, () => {

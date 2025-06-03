@@ -46,3 +46,22 @@ Content-Type: application/json
   ],
   "sinopse": "Um novo filme muito legal."
 }
+
+### Atualizar um filme
+PATCH {{urlBase}}/filmes/FIL001
+Content-Type: application/json
+
+{
+  "titulo": "Novo Atualizado",
+  "ano": 2000,
+  "diretor": {
+    "id": "DIR899",
+    "nome": "Diretor Atualizado",
+    "nascimento": "1945-01-01",
+    "nacionalidade": "Brasileiro"
+  },
+  "sinopse": "Um filme alterado."
+}
+
+### Deletar um filme
+DELETE {{urlBase}}/filmes/FIL001

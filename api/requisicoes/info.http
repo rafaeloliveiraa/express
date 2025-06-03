@@ -1,0 +1,10 @@
+@urlBase = http://localhost:5000 
+
+### Pegar todos os generos
+GET {{urlBase}}/info/generos
+
+### Pegar todos os atores
+GET {{urlBase}}/info/atores
+
+### Pegar todos os diretor
+GET {{urlBase}}/info/diretor

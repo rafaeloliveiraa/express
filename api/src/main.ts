@@ -11,7 +11,7 @@ configDotenv()
 const app = express()
 app.use(express.json())
 app.use(express.urlencoded({extended:true}))
-
+//app.use(jwtMiddleware) // Middleware JWT para todas as rotas
 //app.use(primeiroMiddleware) // Middleware personalizado
 // app.use('/filmes', primeiroMiddleware, routerFilmes) também pode ser usado assim
 app.use(routerAuth)

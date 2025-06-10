@@ -1,13 +1,22 @@
 @urlBase = http://localhost:5000 
 
+### fazer cadastro
+POST {{urlBase}}/cadastrar
+Content-Type: application/json
+
+{
+    "email": "ana3@mail.com.br",
+    "senha": "a"
+}
+
 ### fazer login
 # @name postLogin
 POST {{urlBase}}/login
 Content-Type: application/json
 
 {
-    "email": "ana@mail.com.br",
-    "senha": "123456"
+    "email": "ana2@mail.com.br",
+    "senha": "a"
 }
 
 ###
